@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "9"
+  - "8"
+install:
+  - npm install
+  - cd abstract-factory; npm install
+script:
+  - npm test
+  - npm run lint
