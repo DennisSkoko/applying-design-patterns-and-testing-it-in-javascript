@@ -2,14 +2,16 @@
   "author": "Dennis Skoko <dennis.skoko@hotmail.com> (http://dennisskoko.se)",
   "scripts": {
     "test": "mocha ./*/test/*.js",
-    "lint": "eslint ."
+    "test:w": "mocha --watch ./*/test/*.js --reporter=min"
+  },
+  "dependencies": {
+    "fs-extra": "^6.0.1"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.11.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.7.0",
-    "eslint-plugin-standard": "^3.1.0"
+    "chai": "^4.1.2",
+    "mocha": "^5.1.1",
+    "proxyquire": "^2.0.1",
+    "sinon": "^5.0.7",
+    "sinon-chai": "^3.0.0"
   }
 }
