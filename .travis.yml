@@ -3,7 +3,5 @@ node_js:
   - "8"
 install:
   - npm install
-  - cd abstract-factory; npm install; cd ..
 script:
   - npm test
-  - npm run lint
