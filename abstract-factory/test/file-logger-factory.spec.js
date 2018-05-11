@@ -4,18 +4,18 @@ const { expect } = require('chai')
 const sinon  = require('sinon')
 const proxyquire = require('proxyquire')
 
-const FileLogger = require('../src/logger/file-logger')
+const FileLogger = require('../src/file-logger')
 
 describe('Abstract Factory', function () {
-  describe('logger.file-logger.factory', function () {
+  describe('file-logger-factory', function () {
     let FileLoggerFactory = null
     let fileLoggerSpy = null
 
     before('require the module', function () {
       fileLoggerSpy = sinon.spy(FileLogger)
 
-      FileLoggerFactory = proxyquire('../src/logger/file-logger-factory', {
-        '../../conf/settings': {
+      FileLoggerFactory = proxyquire('../src/file-logger-factory', {
+        '../conf/settings': {
           logger: {
             file: '[filepath]'
           }

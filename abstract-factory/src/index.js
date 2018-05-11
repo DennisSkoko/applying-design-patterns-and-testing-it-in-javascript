@@ -1,8 +1,8 @@
 'use strict'
 
 const LoggerFactory = require(process.env.NODE_ENV === 'production'
-  ? './logger/file-logger-factory'
-  : './logger/console-logger-factory')
+  ? './file-logger-factory'
+  : './console-logger-factory')
 
 const logger = new LoggerFactory().create()
 logger.log('Foo bar')
