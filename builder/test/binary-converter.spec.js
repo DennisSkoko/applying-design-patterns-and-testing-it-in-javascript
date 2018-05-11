@@ -12,5 +12,13 @@ describe('Builder', function () {
 
       expect(converter.getResult()).to.be.equal('101')
     })
+
+    it('should be able to convert multiple data', function () {
+      const converter = new BinaryConverter()
+      converter.append(5)
+      converter.append(3)
+
+      expect(converter.getResult()).to.be.equal('10111')
+    })
   })
 })

@@ -12,5 +12,13 @@ describe('Builder', function () {
 
       expect(converter.getResult()).to.be.equal('1f')
     })
+
+    it('should be able to convert multiple data', function () {
+      const converter = new HexConverter()
+      converter.append(31)
+      converter.append(4)
+
+      expect(converter.getResult()).to.be.equal('1f4')
+    })
   })
 })
