@@ -1,9 +1,9 @@
 'use strict'
 
-const ConsoleLogger = require('./console-logger')
+const Logger = require('./logger')
 
 module.exports = class ConsoleLoggerFactory {
-  create () {
-    return new ConsoleLogger()
+  static async create () {
+    return new Logger(process.stdout)
   }
 }

@@ -1,10 +1,18 @@
 'use strict'
 
+const fs = require('fs-extra')
+
 const settings = require('../conf/settings')
-const FileLogger = require('./file-logger')
+const Logger = require('./logger')
 
 module.exports = class FileLoggerFactory {
-  create () {
-    return new FileLogger(settings.logger.file)
+  static async create () {
+    await fs.ensureFile(settings.logger.file)
+
+    const stream = await fs.createWriteStream(settings.logger.file, {
+      flags: 'a'
+    })
+
+    return new Logger(stream)
   }
 }
