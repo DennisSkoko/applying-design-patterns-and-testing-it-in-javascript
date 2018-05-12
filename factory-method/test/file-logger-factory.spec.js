@@ -4,35 +4,47 @@ const { expect } = require('chai')
 const sinon  = require('sinon')
 const proxyquire = require('proxyquire')
 
-const FileLogger = require('../src/file-logger')
+const Logger = require('../src/logger')
 
-describe('Abstract Factory', function () {
+describe('Factory Method', function () {
   describe('file-logger-factory', function () {
     let FileLoggerFactory = null
-    let fileLoggerSpy = null
+    let stubs = null
 
     before('require the module', function () {
-      fileLoggerSpy = sinon.spy(FileLogger)
+      stubs = {
+        logger: sinon.spy(Logger),
+        ensureFile: sinon.stub().resolves(),
+        createWriteStream: sinon.stub().resolves('[fake stream]')
+      }
 
       FileLoggerFactory = proxyquire('../src/file-logger-factory', {
+        'fs-extra': {
+          ensureFile: stubs.ensureFile,
+          createWriteStream: stubs.createWriteStream
+        },
         '../conf/settings': {
           logger: {
-            file: '[filepath]'
+            file: '[file path]'
           }
         },
-        './file-logger': fileLoggerSpy
+        './logger': stubs.logger
       })
     })
 
     afterEach('reset the history', function () {
-      fileLoggerSpy.resetHistory()
+      stubs.logger.resetHistory()
+      stubs.ensureFile.resetHistory()
+      stubs.createWriteStream.resetHistory()
     })
 
-    it('should create a FileLogger', function () {
-      const logger = new FileLoggerFactory().create()
+    it('should create a Logger with a file stream from fs', async function () {
+      const logger = await FileLoggerFactory.create()
 
-      expect(logger).to.be.instanceof(FileLogger)
-      expect(fileLoggerSpy).to.have.been.calledWithExactly('[filepath]')
+      expect(logger).to.be.instanceof(Logger)
+      expect(stubs.logger).to.have.been.calledWithExactly('[fake stream]')
+      expect(stubs.ensureFile).to.have.been.calledWithExactly('[file path]')
+      expect(stubs.createWriteStream).to.have.been.calledWith('[file path]')
     })
   })
 })
