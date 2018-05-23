@@ -6,7 +6,7 @@ const settings = require('../conf/settings')
 const Logger = require('./logger')
 
 module.exports = class FileLoggerFactory {
-  static async create () {
+  async create () {
     await fs.ensureFile(settings.logger.file)
 
     const stream = await fs.createWriteStream(settings.logger.file, {

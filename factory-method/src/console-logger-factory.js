@@ -3,7 +3,7 @@
 const Logger = require('./logger')
 
 module.exports = class ConsoleLoggerFactory {
-  static async create () {
+  async create () {
     return new Logger(process.stdout)
   }
 }

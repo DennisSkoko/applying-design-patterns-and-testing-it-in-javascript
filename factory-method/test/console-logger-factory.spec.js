@@ -24,7 +24,7 @@ describe('Factory Method', function () {
     })
 
     it('should create Logger with stdout stream', async function () {
-      const logger = await ConsoleLoggerFactory.create()
+      const logger = await new ConsoleLoggerFactory().create()
 
       expect(logger).to.be.instanceof(Logger)
       expect(loggerSpy).to.have.been.calledWithExactly(process.stdout)

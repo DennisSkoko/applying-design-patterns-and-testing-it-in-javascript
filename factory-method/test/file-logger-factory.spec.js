@@ -39,7 +39,7 @@ describe('Factory Method', function () {
     })
 
     it('should create a Logger with a file stream from fs', async function () {
-      const logger = await FileLoggerFactory.create()
+      const logger = await new FileLoggerFactory().create()
 
       expect(logger).to.be.instanceof(Logger)
       expect(stubs.logger).to.have.been.calledWithExactly('[fake stream]')
