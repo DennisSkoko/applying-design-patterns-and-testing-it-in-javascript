@@ -12,5 +12,9 @@ describe('Singleton', function () {
         .to.be.instanceOf(Array)
         .and.lengthOf(3)
     })
+
+    it('return the database instance', function () {
+      expect(Database.getInstance()).to.be.instanceof(Database)
+    })
   })
 })
