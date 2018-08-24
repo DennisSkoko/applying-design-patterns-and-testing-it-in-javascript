@@ -2,22 +2,24 @@
 
 let instance = null
 
+const data = [
+  {
+    name: 'Foo',
+    email: 'foo@gmail.com'
+  },
+  {
+    name: 'Bar',
+    email: 'bar@outlook.com'
+  },
+  {
+    name: 'Baz',
+    email: 'baz@hotmail.com'
+  }
+]
+
 class Database {
   async fetchData () {
-    return [
-      {
-        name: 'Foo',
-        email: 'foo@gmail.com'
-      },
-      {
-        name: 'Bar',
-        email: 'bar@outlook.com'
-      },
-      {
-        name: 'Baz',
-        email: 'baz@hotmail.com'
-      }
-    ]
+    return data
   }
 
   static getInstance () {
