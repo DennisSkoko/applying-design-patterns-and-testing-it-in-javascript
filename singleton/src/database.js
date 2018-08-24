@@ -17,7 +17,7 @@ const data = [
   }
 ]
 
-class Database {
+module.exports = class Database {
   async fetchData () {
     return data
   }
@@ -30,5 +30,3 @@ class Database {
     return instance
   }
 }
-
-module.exports = Database
