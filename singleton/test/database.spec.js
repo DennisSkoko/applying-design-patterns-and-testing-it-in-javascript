@@ -13,7 +13,7 @@ describe('Singleton', function () {
         .and.lengthOf(3)
     })
 
-    it('return the database instance', function () {
+    it('returns the database instance', function () {
       expect(Database.getInstance()).to.be.instanceof(Database)
     })
   })
