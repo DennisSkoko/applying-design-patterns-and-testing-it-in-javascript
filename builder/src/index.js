@@ -6,23 +6,22 @@ const fs = require('fs-extra')
 const BinaryConverter = require('./binary-converter')
 const HexConverter = require('./hex-converter')
 
-const convert = (converter, data) => new Promise(resolve => {
-  data.forEach(value => {
-    converter.append(value)
-  })
+const stream = fs.createReadStream(path.resolve(__dirname, '../res/data.txt'))
 
-  resolve(converter.getResult())
+const binaryConverter = new BinaryConverter()
+const hexConverter = new HexConverter()
+
+stream.on('data', chunk => {
+  chunk.forEach(data => {
+    binaryConverter.append(data)
+    hexConverter.append(data)
+  });
 })
 
-fs.readFile(path.resolve(__dirname, '../res/data.txt'))
-  .then(data => Promise.all([
-    convert(new BinaryConverter(), data),
-    convert(new HexConverter(), data),
-  ]))
-  .then(([ binary, hex ]) => {
-    console.log('Binary:')
-    console.log(binary)
-    console.log('Hex:')
-    console.log(hex)
-  })
-  .catch(console.error)
+stream.on('end', () => {
+  console.log('Binary:')
+  console.log(binaryConverter.getResult())
+  console.log('Hex:')
+  console.log(hexConverter.getResult())
+  stream.close()
+})
